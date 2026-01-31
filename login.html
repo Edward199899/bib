@@ -25,37 +25,55 @@
             margin: 0;
         }
 
-        /* ============================
-           ✨ COMPACT GLASS CARD
-           ============================ */
-      .glass-fit-card {
+     .glass-fit-card {
+
     /* ၁။ နောက်ခံကို အမဲရောင် နည်းနည်းပိုတင်လိုက်ပါ (ဒါမှ စာလုံးအဖြူနဲ့ ဖတ်ရရှင်းမှာ) */
+
     background: rgba(0, 0, 0, 0.4); /* 0.2 ကနေ 0.4 သို့ 0.5 လောက်တင်လိုက်ပါ */
 
+
+
     backdrop-filter: blur(5px);
+
     -webkit-backdrop-filter: blur(5px);
 
+
+
     /* ၂။ Border (ဘောင်) အရောင်ကို လျှော့ပါ သို့မဟုတ် ဖျောက်ပါ */
+
     /* rgba(255, 255, 255, 0.05) လောက်ထားရင် မှိန်သွားမယ် */
+
     border: 1px solid rgba(255, 255, 255, 0.05); 
-            border-radius: 15px;
+
+
+
     /* 👇 ၃။ ဒီကောင် တရားခံပဲ (အလင်းရောင်) - ဒါကို ဖျက်ပစ်လိုက်ပါ 👇 */
+
     /* box-shadow: 0 0 15px rgba(...); */ 
+
     box-shadow: none !important; /* လုံးဝ အလင်းမထွက်အောင် ပိတ်လိုက်တာ */
 
+
+
     /* Size ချိန်တဲ့ ကုဒ်တွေ ဒီနားမှာ ဆက်ရှိနေမယ်... */
-    max-width: 300px;
-    padding: 50px 30px;
+
+    max-width: 320px;
+
+    padding: 30px 25px;
+
     /* ... */
+
 }
 
-         /* Logo Styling */
-        .logo-img { 
-            height: 90px; /* Logo ကို နည်းနည်းပြန်ချုံ့တယ် နေရာဆန့်အောင် */
-            margin-top: -45px;
-            margin-bottom: 1px; margin-left:20px;
+logo-img { 
+
+            height: 50px; 
+
+            margin-bottom: 10px; /* Logo အောက်က အကွာအဝေး */
+
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); 
-        }
+
+        } 
 
         .title { 
             font-family: 'Rajdhani', sans-serif; font-weight: 700; color: #fff; 
