@@ -43,7 +43,7 @@
 
     /* rgba(255, 255, 255, 0.05) လောက်ထားရင် မှိန်သွားမယ် */
 
-    border: 1px solid rgba(255, 255, 255, 0.05); 
+    border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 5px;
 
 
 
@@ -65,21 +65,24 @@
 
 }
 
-logo-img { 
+/* SVG Logo အတွက် CSS */
+.logo-img {
+    width: 80px; /* 1. လိုချင်သလောက် Size ညှိပါ (ဥပမာ 80px သို့ 100px) */
+    height: auto; /* အချိုးအစားမပျက်အောင် ထိန်းသိမ်းခြင်း */
+    display: block; /* Block element အဖြစ်ပြောင်းမယ် */
+    margin-left: 0; /* 2. ဘယ်ဘက်ထောင့်ကပ်ခြင်း */
+    margin-right: auto; /* ညာဘက်ကို တွန်းထုတ်ခြင်း */
+    margin-bottom: 20px; /* Logo အောက်က စာသားနဲ့ ခွာခြင်း */
+    
+    /* တကယ်လို့ ကဒ်ရဲ့ အပေါ်စွန်းနဲ့ အရမ်းကပ်နေရင် ဒါကိုဖွင့်ပါ */
+    /* margin-top: 10px; */
+}
 
-            height: 50px; 
-
-            margin-bottom: 10px; /* Logo အောက်က အကွာအဝေး */
-
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); 
-
-        } 
-
-        .title { 
-            font-family: 'Rajdhani', sans-serif; font-weight: 700; color: #fff; 
-            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; font-size: 22px;
-            text-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
+/* Title ကိုလည်း ဘယ်ဘက်ကပ်ချင်ရင် ဒါကိုထည့်ပါ (Optional) */
+.glass-fit-card .title {
+    text-align: left;
+    margin-bottom: 25px;
+}
 
         /* Input Fields */
         .input-group-custom { margin-bottom: 15px; text-align: left; }

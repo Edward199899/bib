@@ -43,7 +43,8 @@
 
     /* rgba(255, 255, 255, 0.05) လောက်ထားရင် မှိန်သွားမယ် */
 
-    border: 1px solid rgba(255, 255, 255, 0.05); 
+    border: 1px solid rgba(255, 255, 255, 0.05);border-radius: 5px; 
+
 
 
 
@@ -65,20 +66,24 @@
 
 }
 
-logo-img { 
+/* SVG Logo အတွက် CSS */
+.logo-img {
+    width: 80px; /* 1. လိုချင်သလောက် Size ညှိပါ (ဥပမာ 80px သို့ 100px) */
+    height: auto; /* အချိုးအစားမပျက်အောင် ထိန်းသိမ်းခြင်း */
+    display: block; /* Block element အဖြစ်ပြောင်းမယ် */
+    margin-left: 0; /* 2. ဘယ်ဘက်ထောင့်ကပ်ခြင်း */
+    margin-right: auto; /* ညာဘက်ကို တွန်းထုတ်ခြင်း */
+    margin-bottom: 20px; /* Logo အောက်က စာသားနဲ့ ခွာခြင်း */
+    
+    /* တကယ်လို့ ကဒ်ရဲ့ အပေါ်စွန်းနဲ့ အရမ်းကပ်နေရင် ဒါကိုဖွင့်ပါ */
+    /* margin-top: 10px; */
+}
 
-            height: 50px; 
-
-            margin-bottom: 10px; /* Logo အောက်က အကွာအဝေး */
-
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); 
-
-        } 
-        .title { 
-            font-family: 'Rajdhani', sans-serif; font-weight: 700; color: #fff; 
-            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; font-size: 22px;
-            text-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
+/* Title ကိုလည်း ဘယ်ဘက်ကပ်ချင်ရင် ဒါကိုထည့်ပါ (Optional) */
+.glass-fit-card .title {
+    text-align: left;
+    margin-bottom: 25px;
+}
 
         /* Inputs Styling (Transparent) */
         .input-group-custom { margin-bottom: 12px; text-align: left; }
@@ -144,42 +149,43 @@ logo-img {
 <body>
 
     <div class="glass-fit-card">
-        <img src="assets/media/logosvg.svg" alt="Logo" class="logo-img">
-        <h2 class="title">Create Account</h2>
+    <img src="assets/media/logosvg.svg" alt="Logo" class="logo-img">
+    
+    <h2 class="title">Create Account</h2>
 
-        <form>
-            <div class="input-group-custom">
-                <label class="form-label">USERNAME</label>
-                <input type="text" class="form-control-custom" placeholder="Set username" required>
-            </div>
+    <form>
+        <div class="input-group-custom">
+            <label class="form-label">USERNAME</label>
+            <input type="text" id="reg-username" class="form-control-custom" placeholder="Set username" required>
+        </div>
 
-            <div class="input-group-custom">
-                <label class="form-label">EMAIL / PHONE NUMBER</label>
-                <input type="text" id="reg-phone" placeholder="Phone Number"> <input type="text" id="login-phone" placeholder="Phone Number">
-            </div>
+        <div class="input-group-custom">
+            <label class="form-label">PHONE NUMBER</label>
+            <input type="text" id="reg-phone" class="form-control-custom" placeholder="Enter Phone Number" required>
+        </div>
 
-            <div class="row g-2">
-                <div class="col-6">
-                    <div class="input-group-custom">
-                        <label class="form-label">PASSWORD</label>
-                        <input type="password" class="form-control-custom" placeholder="••••" required>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group-custom">
-                        <label class="form-label">CONFIRM</label>
-                        <input type="password" class="form-control-custom" placeholder="••••" required>
-                    </div>
+        <div class="row g-2">
+            <div class="col-6">
+                <div class="input-group-custom">
+                    <label class="form-label">PASSWORD</label>
+                    <input type="password" id="reg-password" class="form-control-custom" placeholder="••••" required>
                 </div>
             </div>
+            <div class="col-6">
+                <div class="input-group-custom">
+                    <label class="form-label">CONFIRM</label>
+                    <input type="password" id="reg-confirm-password" class="form-control-custom" placeholder="••••" required>
+                </div>
+            </div>
+        </div>
 
-            <button type="submit" class="btn-neon">REGISTER</button>
-        </form>
+        <button type="button" class="btn-neon" onclick="handleRegister()">REGISTER</button>
+    </form>
 
-        <a href="login.html" class="footer-link">
-            Already a member? <span>Login Here</span>
-        </a>
-    </div>
+    <a href="login.html" class="footer-link">
+        Already a member? <span>Login Here</span>
+    </a>
+</div>
 <script>
         document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault(); 
