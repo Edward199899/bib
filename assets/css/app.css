@@ -4158,32 +4158,53 @@ footer .newsletter-container form button {
    PREMIUM GLASS HEADER (ADDED BY CO-FOUNDER)
    ------------------------------------------- */
 .header {
-    position: fixed !important;
+
+    position: fixed !important;  /* Scroll ဆွဲရင် လိုက်ဆင်းမယ် */
+
     top: 0;
+
     left: 0;
+
     width: 100%;
-    z-index: 9999 !important;
-    
-    /* 🔥 Changed to Premium Dark Gray (Matte Look) */
-    /* 12,12,13 (Pure Black) အစား 22,27,34 (Dark Blue-Gray) ကိုပြောင်းလိုက်တယ် */
-    background: rgba(22, 27, 34, 0.85) !important; 
-    
-    /* Blur Effect */
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px);
-    
-    /* Border & Shadow */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-    
-    padding: 1px 0 !important;
+
+    z-index: 9999 !important;    /* အပေါ်ဆုံးမှာ အမြဲရှိနေမယ် */
+
+   
+
+    /* Glass Effect (ဖန်သားပြင် ဒီဇိုင်း) */
+
+    background: rgba(12, 12, 13, 0.7) !important; /* အမဲရောင် ဖောက်ထွင်း */
+
+    backdrop-filter: blur(20px) !important;       /* နောက်ခံကို ဝါးလိုက်တာ */
+
+    -webkit-backdrop-filter: blur(20px);          /* iPhone/Safari အတွက် */
+
+   
+
+    /* Premium Look Border & Shadow */
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* အဖြူရောင် မျဉ်းပါးပါးလေး */
+
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);          /* အရိပ်နုနုလေး */
+
+   
+
+    padding: 15px 0 !important;  /* အထူအပါး ချိန်ညှိခြင်း */
+
     transition: all 0.3s ease-in-out;
+
 }
 
+
+
 /* Mobile Menu Button နေရာလွဲမသွားအောင် ထိန်းမယ် */
+
 .mobile-nav__toggler {
-    margin-top: 5px; 
+
+    margin-top: 5px;
+
 }
+
 /* ၁။ Menu Bar ကို အပေါ်ဆုံး ဆွဲတင်မယ် */
 .mobile-nav__wrapper, 
 .side-menu__wrapper,
