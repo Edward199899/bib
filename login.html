@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Binancepro</title>
+    <title>Register | Binance</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/app.css">
 
     <style>
+
         :root {
             --neon-primary: #00ff9d;
             --neon-accent: #00f3ff;
@@ -16,7 +18,7 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            /* 🔥 Login အတွက် နောက်ခံပုံနာမည်တူရင် ဒီအတိုင်းထား၊ မတူရင် နာမည်ပြောင်းပါ */
+            /* 🔥 မင်းရဲ့ပုံကို Center မှာထားပြီး Cover လုပ်ထားမယ် */
             background: url('assets/media/login_bg.jpg') no-repeat center center fixed;
             background-size: cover; 
             height: 100vh;
@@ -25,7 +27,7 @@
             margin: 0;
         }
 
-     .glass-fit-card {
+   .glass-fit-card {
 
     /* ၁။ နောက်ခံကို အမဲရောင် နည်းနည်းပိုတင်လိုက်ပါ (ဒါမှ စာလုံးအဖြူနဲ့ ဖတ်ရရှင်းမှာ) */
 
@@ -44,6 +46,7 @@
     /* rgba(255, 255, 255, 0.05) လောက်ထားရင် မှိန်သွားမယ် */
 
     border: 1px solid rgba(255, 255, 255, 0.05); 
+
 
 
 
@@ -84,30 +87,27 @@
     margin-bottom: 25px;
 }
 
-        .title { 
+ .title { 
             font-family: 'Rajdhani', sans-serif; font-weight: 700; color: #fff; 
             letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; font-size: 22px;
             text-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
-
-        /* Input Fields */
-        .input-group-custom { margin-bottom: 15px; text-align: left; }
+        /* Inputs Styling (Transparent) */
+        .input-group-custom { margin-bottom: 12px; text-align: left; }
         
         .form-label {
             font-size: 10px; color: var(--neon-accent); font-weight: 700; 
             margin-bottom: 3px; display: block; letter-spacing: 1px; font-family: 'Rajdhani';
-            text-shadow: 0 0 5px rgba(0,0,0,0.8);
+            text-shadow: 0 0 5px rgba(0,0,0,0.8); /* စာဖတ်ရလွယ်အောင် Shadow ခံတယ် */
         }
 
         .form-control-custom {
             width: 100%;
+            /* Input နောက်ခံကိုပါ ဖျောက်လိုက်တယ် */
             background: rgba(255, 255, 255, 0.05); 
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px;
-            
-            /* 🔥 Input ကွက်လပ် အမြင့်ကို လျှော့ချင်ရင် 10px ကို 8px ပြောင်းပါ */
             padding: 10px 15px;
-            
             color: #fff;
             font-size: 13px;
             transition: all 0.3s;
@@ -116,11 +116,12 @@
         .form-control-custom:focus {
             outline: none;
             border-color: var(--neon-primary);
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.4); /* ရိုက်နေရင် နည်းနည်းမဲသွားမယ် */
             box-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
         }
+        .form-control-custom::placeholder { color: rgba(255, 255, 255, 0.3); }
 
-        /* Button */
+        /* Neon Button */
         .btn-neon {
             width: 100%;
             background: linear-gradient(135deg, var(--neon-primary), #00b871);
@@ -132,22 +133,24 @@
             font-weight: 700;
             font-size: 16px;
             letter-spacing: 1px;
-            
-            /* 🔥 ခလုတ်နဲ့ အပေါ်က Input ကြား အကွာအဝေး */
-            margin-top: 15px;
-            
+            margin-top: 10px;
             box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
             transition: 0.3s;
         }
-        .btn-neon:hover { transform: scale(1.02); }
+        .btn-neon:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(0, 255, 157, 0.6);
+        }
 
         .footer-link {
             display: block; margin-top: 15px; color: #ccc; font-size: 12px; text-decoration: none;
         }
         .footer-link span { color: var(--neon-primary); font-weight: 700; }
-        
-        .forgot-pass { float: right; font-size: 10px; color: #aaa; text-decoration: none; margin-top: 5px; }
 
+        /* Mobile Adjustments */
+        @media (max-width: 400px) {
+            .glass-fit-card { max-width: 90%; padding: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -173,40 +176,12 @@
             <button type="submit" class="btn-neon">LOGIN</button>
         </form>
 
-        <a href="register.html" class="footer-link">
+       <a href="register.html" class="footer-link">
             New here? <span>Create Account</span>
         </a>
     </div>
-
-<script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault(); // Form က submit ဖြစ်ပြီး refresh ဖြစ်သွားမှာကို တားလိုက်တာ
-            
-            // ခလုတ်ကို လှမ်းဖမ်းမယ်
-            let btn = document.querySelector('.btn-neon');
-            let originalText = btn.innerText;
-
-            // Loading Effect အစစ်အတိုင်းပြမယ်
-            btn.innerText = 'AUTHENTICATING...';
-            btn.style.opacity = '0.7';
-            btn.style.cursor = 'wait';
-
-            // ၁.၅ စက္ကန့်နေရင် Dashboard (Index) ကို ခေါ်သွားမယ်
-            setTimeout(() => {
-                window.location.href = 'index.html'; 
-            }, 1500);
-        });
-    </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="assets/js/core.js"></script>
-
-<script src="assets/js/auth.js"></script>
-
-<script>
-    // Login Button နှိပ်ရင် အလုပ်လုပ်မယ့် Function ချိတ်ဆက်ခြင်း
-    document.querySelector('.btn-login').addEventListener('click', handleLogin); // class name သို့ id ပြန်ချိန်ပါ
-</script>
-
+    <script src="assets/js/core.js"></script>
+    <script src="assets/js/auth.js"></script>
 </body>
 </html>

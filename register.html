@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | Binancepro</title>
+    <title>Register | BibCoin Premium</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/app.css">
 
     <style>
         :root {
@@ -165,7 +166,7 @@
         </div>
 
         <div class="input-group-custom">
-            <label class="form-label">/EMAIL / PHONE NUMBER</label>
+            <label class="form-label">EMAIL / PHONE NUMBER</label>
             <input type="text" id="reg-phone" class="form-control-custom" placeholder="Enter Phone Number" required>
         </div>
 
@@ -187,41 +188,14 @@
         <button type="button" class="btn-neon" onclick="handleRegister()">REGISTER</button>
     </form>
 
-    <a href="login.html" class="footer-link">
-        Already a member? <span>Login Here</span>
-    </a>
-</div>
-<script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            
-            let btn = document.querySelector('.btn-neon');
-            
-            // Register လုပ်နေတဲ့ ပုံစံပြမယ်
-            btn.innerText = 'CREATING WALLET...';
-            btn.style.opacity = '0.7';
-            btn.style.cursor = 'wait';
-
-            setTimeout(() => {
-                // ပြီးရင် Index ကို တန်းပို့လိုက်မယ်
-                window.location.href = 'index.html';
-            }, 1500);
-        });
-    </script>
-    
-
+   <a href="login.html" class="footer-link">
+            Already a member? <span>Login Here</span>
+        </a>
+    </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="assets/js/core.js"></script>
+    <script src="assets/js/core.js"></script>
 
-<script src="assets/js/auth.js"></script>
-
-<script>
-    // Register Button နှိပ်ရင် အလုပ်လုပ်မယ့် Function ချိတ်ဆက်ခြင်း
-    document.querySelector('.btn-register').addEventListener('click', handleRegister);
-</script>
-
-    
-
+    <script src="assets/js/auth.js"></script>
 </body>
 </html>
