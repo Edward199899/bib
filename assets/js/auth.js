@@ -1,51 +1,3 @@
-/* --- BIBCOIN SMART AUTH SYSTEM --- */
-
-// ၁။ UID Random ၆ လုံး ထုတ်ပေးခြင်း
-function generateUID() {
-    return Math.floor(100000 + Math.random() * 900000).toString();
-}
-
-// ၂။ Register လုပ်ခြင်း (ဖုန်းနံပါတ်ပါ Profile ထဲ ထည့်သိမ်းမယ်)
-async function handleRegister() {
-    const username = document.getElementById('reg-username').value.trim();
-    const phone = document.getElementById('reg-phone').value.trim();
-    const password = document.getElementById('reg-password').value.trim();
-
-    if (!username || !phone || !password) return alert("အကုန်ဖြည့်ပါ");
-
-    // ဖုန်းနံပါတ်ကို Email အတုပြောင်းမယ်
-    const fakeEmail = phone + "@bibcoin.com";
-
-    // A. Auth မှာ အကောင့်ဖွင့်မယ်
-    const { data, error } = await db.auth.signUp({
-        email: fakeEmail,
-        password: password
-    });
-
-    if (error) return alert("Register Error: " + error.message);
-
-    if (data.user) {
-        const newUID = generateUID();
-        
-        // B. Profile ထဲမှာ ဖုန်းနံပါတ်ပါ ထည့်သိမ်းမယ် (ဒါမှ Username နဲ့ပြန်ရှာလို့ရမှာ)
-        const { error: profileError } = await db.from('profiles').insert([
-            { 
-                id: data.user.id, 
-                username: username, 
-                phone: phone, // 🔥 ဒါလေး အသစ်ထပ်ထည့်လိုက်တယ်
-                uid: newUID, 
-                balance: 0 
-            }
-        ]);
-
-        if (!profileError) {
-            alert("Account Created! UID: " + newUID);
-            window.location.href = 'index.html';
-        }
-    }
-}
-
-
 // Register လုပ်ခြင်း (Data အကုန်သိမ်းမည့် Version)
 async function handleRegister() {
     // HTML Input တွေဆီက Data လှမ်းယူမယ်
@@ -91,4 +43,4 @@ async function handleRegister() {
             alert("Saving Data Error: " + profileError.message);
         }
     }
-}
+}  
