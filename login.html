@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | DefiCoin</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --neon-primary: #00ff9d;
+            --neon-accent: #00f3ff;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            /* 🔥 Login အတွက် နောက်ခံပုံနာမည်တူရင် ဒီအတိုင်းထား၊ မတူရင် နာမည်ပြောင်းပါ */
+            background: url('assets/media/login_bg.jpg') no-repeat center center fixed;
+            background-size: cover; 
+            height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        /* ============================
+           ✨ COMPACT GLASS CARD
+           ============================ */
+      .glass-fit-card {
+    /* ၁။ နောက်ခံကို အမဲရောင် နည်းနည်းပိုတင်လိုက်ပါ (ဒါမှ စာလုံးအဖြူနဲ့ ဖတ်ရရှင်းမှာ) */
+    background: rgba(0, 0, 0, 0.4); /* 0.2 ကနေ 0.4 သို့ 0.5 လောက်တင်လိုက်ပါ */
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    /* ၂။ Border (ဘောင်) အရောင်ကို လျှော့ပါ သို့မဟုတ် ဖျောက်ပါ */
+    /* rgba(255, 255, 255, 0.05) လောက်ထားရင် မှိန်သွားမယ် */
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+            border-radius: 15px;
+    /* 👇 ၃။ ဒီကောင် တရားခံပဲ (အလင်းရောင်) - ဒါကို ဖျက်ပစ်လိုက်ပါ 👇 */
+    /* box-shadow: 0 0 15px rgba(...); */ 
+    box-shadow: none !important; /* လုံးဝ အလင်းမထွက်အောင် ပိတ်လိုက်တာ */
+
+    /* Size ချိန်တဲ့ ကုဒ်တွေ ဒီနားမှာ ဆက်ရှိနေမယ်... */
+    max-width: 300px;
+    padding: 50px 30px;
+    /* ... */
+}
+
+         /* Logo Styling */
+        .logo-img { 
+            height: 90px; /* Logo ကို နည်းနည်းပြန်ချုံ့တယ် နေရာဆန့်အောင် */
+            margin-top: -45px;
+            margin-bottom: 1px; margin-left:20px;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); 
+        }
+
+        .title { 
+            font-family: 'Rajdhani', sans-serif; font-weight: 700; color: #fff; 
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; font-size: 22px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        /* Input Fields */
+        .input-group-custom { margin-bottom: 15px; text-align: left; }
+        
+        .form-label {
+            font-size: 10px; color: var(--neon-accent); font-weight: 700; 
+            margin-bottom: 3px; display: block; letter-spacing: 1px; font-family: 'Rajdhani';
+            text-shadow: 0 0 5px rgba(0,0,0,0.8);
+        }
+
+        .form-control-custom {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            
+            /* 🔥 Input ကွက်လပ် အမြင့်ကို လျှော့ချင်ရင် 10px ကို 8px ပြောင်းပါ */
+            padding: 10px 15px;
+            
+            color: #fff;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .form-control-custom:focus {
+            outline: none;
+            border-color: var(--neon-primary);
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
+        }
+
+        /* Button */
+        .btn-neon {
+            width: 100%;
+            background: linear-gradient(135deg, var(--neon-primary), #00b871);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            color: #000;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 1px;
+            
+            /* 🔥 ခလုတ်နဲ့ အပေါ်က Input ကြား အကွာအဝေး */
+            margin-top: 15px;
+            
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+            transition: 0.3s;
+        }
+        .btn-neon:hover { transform: scale(1.02); }
+
+        .footer-link {
+            display: block; margin-top: 15px; color: #ccc; font-size: 12px; text-decoration: none;
+        }
+        .footer-link span { color: var(--neon-primary); font-weight: 700; }
+        
+        .forgot-pass { float: right; font-size: 10px; color: #aaa; text-decoration: none; margin-top: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="glass-fit-card">
+        <img src="assets/media/logo.png" alt="Logo" class="logo-img">
+        <h2 class="title">Welcome Back</h2>
+
+        <form>
+            <div class="input-group-custom">
+                <label class="form-label">USERNAME / PHONE NUMBER</label>
+                <input type="text" class="form-control-custom" placeholder="Enter ID" required>
+            </div>
+
+            <div class="input-group-custom">
+                <label class="form-label">PASSWORD</label>
+                <input type="password" class="form-control-custom" placeholder="••••••••" required>
+                <a href="#" class="forgot-pass">Forgot?</a>
+            </div>
+            
+            <div style="clear: both;"></div> 
+
+            <button type="submit" class="btn-neon">LOGIN</button>
+        </form>
+
+        <a href="register.html" class="footer-link">
+            New here? <span>Create Account</span>
+        </a>
+    </div>
+
+<script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Form က submit ဖြစ်ပြီး refresh ဖြစ်သွားမှာကို တားလိုက်တာ
+            
+            // ခလုတ်ကို လှမ်းဖမ်းမယ်
+            let btn = document.querySelector('.btn-neon');
+            let originalText = btn.innerText;
+
+            // Loading Effect အစစ်အတိုင်းပြမယ်
+            btn.innerText = 'AUTHENTICATING...';
+            btn.style.opacity = '0.7';
+            btn.style.cursor = 'wait';
+
+            // ၁.၅ စက္ကန့်နေရင် Dashboard (Index) ကို ခေါ်သွားမယ်
+            setTimeout(() => {
+                window.location.href = 'index.html'; 
+            }, 1500);
+        });
+    </script>
+
+
+</body>
+</html>
