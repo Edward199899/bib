@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="BibCoin Premium Trading Platform">
-    <title>BibCoin Premium</title>
+    <title>Binance</title>
 
     <link rel="shortcut icon" type="image/svg+xml" href="assets/media/faviconsvg.svg">
 
@@ -2343,23 +2343,23 @@
     </div>
     <!-- Mobile Menu End -->
 
-<div id="app-content">
-        <h1>Binance</h1>
-        <p>User ID: <span id="user-uid">Loading...</span></p>
-    </div>
-
-  <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
+<script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
     <script src="assets/js/vendor/jquery-validator.js"></script>
     <script src="assets/js/vendor/slick.min.js"></script>
 
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="assets/js/core.js"></script>
+    <script src="assets/js/core.js"></script>
 
+    <script>
+        // core.js ထဲက checkAccess function ကို လှမ်းခေါ်မယ်
+        if (typeof checkAccess === 'function') {
+            checkAccess(); 
+        } else {
+            console.error("Core.js not loaded properly!");
+        }
+    </script>
 
-
-
-
-    </body>
+</body>
 </html>
