@@ -430,7 +430,7 @@
     </div>
     <!-- Preloader-->
 
-    !-- Main Wrapper Start -->
+    <!-- Main Wrapper Start -->
 
     <div>
 
@@ -940,54 +940,6 @@
     <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
     <script src="assets/js/vendor/slick.min.js"></script>
     <script src="assets/js/app.js"></script>
-
-
-
-<script>
-        $(document).ready(function() {
-            // Button Click Effect
-            $('.trade-btn').on('mousedown touchstart', function() {
-                $(this).css('transform', 'scale(0.96)');
-            }).on('mouseup touchend', function() {
-                $(this).css('transform', 'scale(1)');
-            });
-            
-            // Time Selector Logic
-            $('.time-btn').on('click', function() {
-                $('.time-btn').removeClass('active').css({
-                    'background': 'transparent',
-                    'border-color': 'rgba(255,255,255,0.1)'
-                });
-                $(this).addClass('active').css({
-                    'background': '#005ED3',
-                    'border-color': '#005ED3'
-                });
-            });
-        });
-    </script>
- <!-- Mobile Menu End -->
-
-
-
-    <!-- Jquery Js -->
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
-    <script src="assets/js/vendor/jquery-validator.js"></script>
-
-    <script src="assets/js/app.js"></script>
-
-<script>
-        $(window).on('load', function() {
-            // Preloader ပျောက်သွားပြီး 0.5 စက္ကန့်နေမှ Input Bar ကို ဖြည်းဖြည်းချင်း ပေါ်လာစေမယ်
-            setTimeout(function() {
-                $('.chat-input-area').fadeIn(1500); 
-            }, 3800);
-            
-            // Auto scroll to bottom
-            window.scrollTo(0, document.body.scrollHeight);
-        });
-    </script>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
