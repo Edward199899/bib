@@ -5,12 +5,19 @@ const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 async function checkAccess() {
     const { data: { session } } = await db.auth.getSession();
-    const isAuthPage = window.location.pathname.includes('login.html') || window.location.pathname.includes('register.html');
-
-    if (!session && !isAuthPage) {
+    const path = window.location.pathname;
+    
+    // Login ဝင်မထားရင် Index ကို ပေးမဝင်ဘူး
+    if (!session && !path.includes('login.html') && !path.includes('register.html')) {
         window.location.href = 'login.html';
-    } else if (session && isAuthPage) {
+    } 
+    // Login ဝင်ထားရင် Login/Register Page ကို ပေးမဝင်ဘူး
+    else if (session && (path.includes('login.html') || path.includes('register.html'))) {
         window.location.href = 'index.html';
     }
 }
-checkAccess();
+
+function hideLoader() {
+    const loader = document.getElementById('preloader');
+    if (loader) loader.style.display = 'none';
+}

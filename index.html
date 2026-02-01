@@ -2352,13 +2352,12 @@
 
     <script src="assets/js/core.js"></script>
 
-    <script>
-        // core.js ထဲက checkAccess function ကို လှမ်းခေါ်မယ်
-        if (typeof checkAccess === 'function') {
-            checkAccess(); 
-        } else {
-            console.error("Core.js not loaded properly!");
-        }
+  <script>
+        // စာမျက်နှာ စတာနဲ့ ဒါတွေကို လုပ်မယ်
+        window.onload = async () => {
+            await checkAccess(); // ၁။ Login စစ်မယ်
+            hideLoader();        // ၂။ အားလုံးပြီးရင် Loading screen ဖျောက်မယ်
+        };
     </script>
 
 </body>
