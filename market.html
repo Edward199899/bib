@@ -904,11 +904,6 @@
  </div>
  <!-- Main Wrapper End -->
 
-
-    <!-- Back To Top Start -->
-    <button class="scrollToTopBtn"><i class="fa fa-arrow-up"></i></button>
-
-
     <!-- Mobile Menu Start -->
     <div class="mobile-nav__wrapper">
         <div class="mobile-nav__overlay mobile-nav__toggler"></div>
@@ -967,6 +962,29 @@
             });
         });
     </script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <script src="assets/js/core.js"></script>
+
+    <script>
+        window.addEventListener('load', async function() {
+            
+            // (က) Login မဝင်ရသေးရင် ကန်ထုတ်မယ်
+            if (typeof checkAccess === 'function') {
+                await checkAccess();
+            }
+
+            // (ခ) Header မှာ နာမည်၊ ID၊ ပိုက်ဆံ ပေါ်အောင်လုပ်မယ်
+            if (typeof updateUI === 'function') {
+                await updateUI();
+            }
+
+            // (ဂ) အားလုံးပြီးမှ Loading ဖျောက်မယ် (Smooth ဖြစ်သွားအောင်)
+            if (typeof hideLoader === 'function') {
+                hideLoader();
+            }
+        });
+    </script>
+
+</body>
 </html>

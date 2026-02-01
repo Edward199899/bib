@@ -30,7 +30,10 @@ async function handleRegister() {
         btn.innerText = originalText;
         btn.disabled = false;
     } else {
-        // 🔥 အရေးကြီးဆုံးအဆင့်: Profiles Table ထဲ Data ထည့်မယ် 🔥
+        // 🔥 UID (ဂဏန်း ၆ လုံး) ကျပန်းထုတ်မယ် 🔥
+        const randomUID = Math.floor(100000 + Math.random() * 900000);
+
+        // Profiles Table ထဲ Data ထည့်မယ်
         const { error: profileError } = await db
             .from('profiles')
             .insert([
@@ -38,12 +41,17 @@ async function handleRegister() {
                     id: data.user.id, // Auth ID နဲ့ချိတ်မယ်
                     username: username,
                     phone: phone,
-                    balance: 0.00
+                    balance: 0.00,
+                    uid: randomUID  // ✅ ဒီနေရာမှာ UID ပေါင်းထည့်လိုက်ပြီ
                 }
             ]);
 
         if (profileError) {
+            console.error(profileError); // Error စစ်ဖို့ console ထုတ်ထားမယ်
             alert("Profile Save Error: " + profileError.message);
+            // Error တက်ရင် Button ပြန်ပြင်ပေးမယ်
+            btn.innerText = originalText;
+            btn.disabled = false;
         } else {
             alert("Account Created Successfully!");
             window.location.href = 'index.html'; // Index ကိုပို့မယ်
@@ -76,7 +84,7 @@ async function handleLogin() {
         alert("Login Failed: ဖုန်းနံပါတ် သို့မဟုတ် Password မှားနေပါသည်");
         btn.innerText = "LOGIN";
     } else {
-        // Login မှန်ရင် Index ကိုတန်းပို့မယ် (Data မပြဘူး)
+        // Login မှန်ရင် Index ကိုတန်းပို့မယ်
         window.location.href = 'index.html';
     }
 }
