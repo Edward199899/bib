@@ -21,3 +21,11 @@ function hideLoader() {
     const loader = document.getElementById('preloader');
     if (loader) loader.style.display = 'none';
 }
+
+// Logout Function
+async function logout() {
+    const { error } = await db.auth.signOut();
+    if (!error) {
+        window.location.href = 'login.html';
+    }
+}
