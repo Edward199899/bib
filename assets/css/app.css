@@ -4235,7 +4235,7 @@ footer .newsletter-container form button {
 
 /* HERO SECTION */
 .binance-hero {
-    background-color: var(--binance-bg);
+    background-color:rgb(25,26,31);
     padding: 60px 20px 40px 20px;
     text-align: center;
     border-bottom: 1px solid #2b3139;
@@ -4261,8 +4261,8 @@ footer .newsletter-container form button {
 
 /* BUTTONS */
 .btn-login-gold {
-    background-color: var(--binance-yellow);
-    color:#F0B90B;
+    background-color: #F0B90B;
+    color:var(--binance-gray);
     font-weight: 700;
     width: 200px;
     padding: 14px;
