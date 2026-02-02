@@ -4225,3 +4225,64 @@ footer .newsletter-container form button {
     padding-top: 20px !important; /* အပေါ်က အကွာအဝေးကို လျှော့လိုက်မယ် */
 }
 
+/* BINANCE STYLE VARIABLES */
+:root {
+    --binance-bg: #1e1e1e;
+    --binance-yellow: #FCD535; /* Binance Official Yellow */
+    --binance-gray: #EAECEF;
+    --text-muted: #848E9C;
+}
+
+/* HERO SECTION */
+.binance-hero {
+    background-color: var(--binance-bg);
+    padding: 60px 20px 40px 20px;
+    text-align: center;
+    border-bottom: 1px solid #2b3139;
+}
+
+/* BIG NUMBERS */
+.trust-number {
+    color: var(--binance-yellow);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 42px; /* Mobile မှာ အဆင်ပြေမယ့် size */
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.trust-label {
+    color: #fff;
+    font-weight: 800;
+    font-size: 28px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* BUTTONS */
+.btn-login-gold {
+    background-color: var(--binance-yellow);
+    color: #000;
+    font-weight: 700;
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 15px; /* Login နဲ့ Sign Up ကြား ဟမယ် */
+    font-size: 16px;
+    display: block;
+    text-decoration: none;
+}
+
+.btn-signup-dark {
+    background-color: #2B3139;
+    color: var(--binance-gray);
+    font-weight: 700;
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    display: block;
+    text-decoration: none;
+}
