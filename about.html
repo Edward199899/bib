@@ -808,6 +808,7 @@
                     </linearGradient>
                 </defs>
             </svg>
+
 <section style="
     padding-top: 75px; 
     padding-bottom: 30px; 
@@ -838,8 +839,8 @@
             position: relative; 
             overflow: hidden;">
 
-            <div style="margin-bottom: 15px; cursor: pointer;" onclick="navigator.clipboard.writeText('839201')">
-                <span style="color: #5d6375; font-size: 11px; font-family: monospace; letter-spacing: 1px;">UID: 839201</span>
+            <div id="copy-uid-btn" style="margin-bottom: 15px; cursor: pointer;">
+                <span id="user-uid" style="color: #5d6375; font-size: 11px; font-family: monospace; letter-spacing: 1px;">UID: Loading...</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#5d6375" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: middle;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
             </div>
 
@@ -849,23 +850,22 @@
 
             <div style="display: flex; align-items: baseline; gap: 8px;">
                 
-                <h1 style="color: #ffffff; font-size: 32px; font-weight: 700; margin: 0; letter-spacing: -0.5px; font-family: 'Outfit', sans-serif; line-height: 1; text-shadow: 0 0 20px rgba(255,255,255,0.1);">
+                <h1 id="user-balance" style="color: #ffffff; font-size: 32px; font-weight: 700; margin: 0; letter-spacing: -0.5px; font-family: 'Outfit', sans-serif; line-height: 1; text-shadow: 0 0 20px rgba(255,255,255,0.1);">
                     $0.00
                 </h1>
 
                 <div style="display: flex; align-items: center; gap: 6px;">
                     <span style="color: #8b92a1; font-size: 12px; font-weight: 600;">USDT</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b92a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer; opacity: 0.7;">
+                    
+                    <svg id="toggle-eye" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b92a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer; opacity: 0.7;">
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                         <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
+                        </svg>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-
         </div>
-    </div>
-</div>
 
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7 col-sm-10">
@@ -900,10 +900,9 @@
                 </div>
 
             </div>
-        </div>
-
-    </div>
-</section>
+           </div>
+    </div> 
+    </section>
 
 
             <!-- BUY/SELL CARD START -->
@@ -1268,31 +1267,29 @@
     </div>
     <!-- Mobile Menu End -->
 
-    <!-- Jquery Js -->
+ <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
     <script src="assets/js/vendor/slick.min.js"></script>
 
     <script src="assets/js/app.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/core.js"></script>
+    <script src="assets/js/assets.js"></script> 
 
     <script>
         window.addEventListener('load', async function() {
-            
             // (က) Login မဝင်ရသေးရင် ကန်ထုတ်မယ်
             if (typeof checkAccess === 'function') {
                 await checkAccess();
             }
 
-            // (ခ) Header မှာ နာမည်၊ ID၊ ပိုက်ဆံ ပေါ်အောင်လုပ်မယ်
+            // (ခ) Header နဲ့ တခြား UI တွေ Update လုပ်မယ်
             if (typeof updateUI === 'function') {
                 await updateUI();
             }
 
-            // (ဂ) အားလုံးပြီးမှ Loading ဖျောက်မယ် (Smooth ဖြစ်သွားအောင်)
+            // (ဂ) အားလုံးပြီးမှ Loading ဖျောက်မယ်
             if (typeof hideLoader === 'function') {
                 hideLoader();
             }

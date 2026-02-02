@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DefiAdmin | Cyber Command</title>
+    <title>Edward: founder</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/admin.css">
-    
+    <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
 
@@ -17,17 +16,17 @@
         <div class="brand-logo"><i class="fa-solid fa-shield-halved me-2"></i>DEFI<span style="color:#fff;">ADMIN</span></div>
         
         <div class="nav nav-icons" id="nav-tab" role="tablist">
-            <button class="nav-icon-btn active" id="tab-control" data-bs-toggle="tab" data-bs-target="#content-control" title="User Control">
+            <button class="nav-icon-btn active" data-bs-toggle="tab" data-bs-target="#content-control" title="User Control">
                 <i class="fa-solid fa-users-gear"></i>
             </button>
-            <button class="nav-icon-btn" id="tab-funds" data-bs-toggle="tab" data-bs-target="#content-funds" title="Funds Manager">
+            <button class="nav-icon-btn" data-bs-toggle="tab" data-bs-target="#content-funds" title="Funds Manager">
                 <i class="fa-solid fa-wallet"></i>
             </button>
-            <button class="nav-icon-btn" id="tab-chat" data-bs-toggle="tab" data-bs-target="#content-chat" title="Live Support">
+            <button class="nav-icon-btn" data-bs-toggle="tab" data-bs-target="#content-chat" title="Live Support">
                 <i class="fa-solid fa-comments"></i>
-                <span style="position: absolute; top: 5px; right: 5px; width: 6px; height: 6px; background: var(--neon-red); border-radius: 50%;"></span>
+                <span id="chat-notification-dot" style="position: absolute; top: 5px; right: 5px; width: 6px; height: 6px; background: #ff4d4d; border-radius: 50%; display: none;"></span>
             </button>
-            <button class="nav-icon-btn" style="color: var(--neon-red);" title="Logout">
+            <button class="nav-icon-btn" style="color: #ff4d4d;" title="Logout" onclick="handleLogout()">
                 <i class="fa-solid fa-power-off"></i>
             </button>
         </div>
@@ -38,60 +37,15 @@
 
             <div class="tab-pane fade show active" id="content-control">
                 <div class="holo-card">
-                    <div class="section-title">
-                        <i class="fa-solid fa-microchip"></i> TRADE ALGORITHM CONTROL
-                    </div>
+                    <div class="section-title"><i class="fa-solid fa-microchip"></i> USER ALGORITHM CONTROL</div>
 
-                    <div class="input-group mb-4" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden;">
+                    <div class="input-group mb-4" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.05);">
                         <span class="input-group-text bg-transparent border-0 text-muted"><i class="fa fa-search"></i></span>
-                        <input type="text" class="form-control bg-transparent border-0 text-white shadow-none" placeholder="Search UID or Username...">
+                        <input type="text" id="user-search-input" class="form-control bg-transparent border-0 text-white shadow-none" placeholder="Search UID..." onkeyup="filterUserList()">
                     </div>
 
-                    <div class="user-list">
-                        <div class="user-row">
-                            <div class="user-info">
-                                <div class="avatar">K</div>
-                                <div>
-                                    <div style="font-weight: bold; font-size: 15px;">Kyaw Kyaw</div>
-                                    <div style="font-family: monospace; font-size: 11px; color: var(--neon-blue);">UID: 839201</div>
-                                </div>
-                            </div>
-                            
-                            <div class="control-panel">
-                                <div class="d-flex gap-1">
-                                    <button class="btn-toggle win active" onclick="toggleMode(this)">WIN</button>
-                                    <button class="btn-toggle lose" onclick="toggleMode(this)">LOSE</button>
-                                </div>
-                                <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.2);"></div>
-                                <div class="d-flex align-items-center gap-1">
-                                    <input type="number" class="cyber-input" value="100">
-                                    <span style="font-size: 12px; color: #888;">%</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="user-row">
-                            <div class="user-info">
-                                <div class="avatar" style="border-color: var(--neon-red); color: var(--neon-red);">A</div>
-                                <div>
-                                    <div style="font-weight: bold; font-size: 15px;">Aung Aung</div>
-                                    <div style="font-family: monospace; font-size: 11px; color: var(--neon-red);">UID: 112233</div>
-                                </div>
-                            </div>
-                            
-                            <div class="control-panel">
-                                <div class="d-flex gap-1">
-                                    <button class="btn-toggle win" onclick="toggleMode(this)">WIN</button>
-                                    <button class="btn-toggle lose active" onclick="toggleMode(this)">LOSE</button>
-                                </div>
-                                <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.2);"></div>
-                                <div class="d-flex align-items-center gap-1">
-                                    <input type="number" class="cyber-input" value="80">
-                                    <span style="font-size: 12px; color: #888;">%</span>
-                                </div>
-                            </div>
-                        </div>
-
+                    <div class="user-list" id="all-users-container">
+                        <div class="text-center p-5 text-muted">Initializing Command Center...</div>
                     </div>
                 </div>
             </div>
@@ -103,20 +57,23 @@
                     </div>
                     
                     <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; border: 1px solid rgba(255,255,255,0.05);">
-                        <input type="text" class="cyber-text-field text-center w-100 mb-3" placeholder="Enter UID to Search" style="font-size: 16px; font-weight: bold; letter-spacing: 1px;">
-                        <button class="btn w-100" style="background: var(--neon-blue); color: #000; font-weight: bold; border-radius: 30px;">SEARCH ASSET</button>
+                        <input type="text" id="fund-search-uid" class="cyber-text-field text-center w-100 mb-3" placeholder="Enter UID to Search">
+                        <button class="btn w-100 mb-4" onclick="checkUserForFunds()" style="background: #00e676; color: #000; font-weight: bold; border-radius: 30px;">SEARCH ASSET</button>
                         
-                        <div class="mt-4 pt-3 border-top border-secondary text-start">
+                        <div id="fund-action-area" style="display: none;" class="pt-3 border-top border-secondary text-start">
                             <div class="d-flex justify-content-between mb-3 text-white">
-                                <span>Target: <strong>Kyaw Kyaw</strong></span>
-                                <span style="color: var(--neon-green);">Bal: $1,250.00</span>
+                                <span>Target: <strong id="fund-target-uid" class="text-info">---</strong></span>
+                                <span style="color: #00e676;">Bal: $<span id="fund-target-balance">0.00</span></span>
                             </div>
+                            <input type="hidden" id="fund-target-db-id">
+
                             <div class="d-flex gap-2 mb-3">
-                                <button class="btn btn-outline-success flex-fill">DEPOSIT (+)</button>
-                                <button class="btn btn-outline-danger flex-fill">WITHDRAW (-)</button>
+                                <button class="btn btn-outline-success flex-fill" onclick="setFundMode('add')">DEPOSIT (+)</button>
+                                <button class="btn btn-outline-danger flex-fill" onclick="setFundMode('remove')">WITHDRAW (-)</button>
                             </div>
-                            <input type="number" class="cyber-text-field w-100 mb-3" placeholder="Amount ($)">
-                            <button class="btn w-100 btn-success" style="box-shadow: 0 0 15px rgba(0,255,157,0.3);">CONFIRM</button>
+                            
+                            <input type="number" id="fund-amount" class="cyber-text-field w-100 mb-3" placeholder="Amount ($)">
+                            <button class="btn w-100 btn-success" onclick="confirmFundUpdate()">CONFIRM TRANSACTION</button>
                         </div>
                     </div>
                 </div>
@@ -124,44 +81,15 @@
 
             <div class="tab-pane fade" id="content-chat">
                 <div class="chat-layout">
-                    <div class="chat-sidebar">
-                        <div class="chat-avatar-wrapper active">
-                            <img src="https://ui-avatars.com/api/?name=Kyaw+Kyaw&background=0D8ABC&color=fff" class="chat-avatar" alt="">
-                            <div class="online-dot"></div>
-                        </div>
-                        <div class="chat-avatar-wrapper">
-                            <img src="https://ui-avatars.com/api/?name=Aung+Aung&background=random" class="chat-avatar" alt="">
-                        </div>
-                    </div>
-
+                    <div class="chat-sidebar" id="chat-user-list"></div>
                     <div class="chat-main">
                         <div class="chat-header">
-                            <div>
-                                <h6 class="m-0" style="font-family: 'Rajdhani'; font-weight: 700;">UID: <span style="color: var(--neon-green);">839201</span></h6>
-                                <span style="font-size: 10px; color: #888;">Online via App</span>
-                            </div>
-                            <button class="btn btn-sm btn-outline-secondary rounded-pill" style="font-size: 10px;">CLOSE TICKET</button>
+                            <h6 class="m-0">ID: <span id="chat-header-uid" style="color: #00e676;">Select User</span></h6>
                         </div>
-
-                        <div class="chat-box">
-                            <div class="msg msg-user">
-                                Hello Admin, I just deposited $500 via USDT.
-                                <div style="font-size: 9px; opacity: 0.5; margin-top: 5px;">10:30 AM</div>
-                            </div>
-                            <div class="msg msg-admin">
-                                Signal received. Verifying blockchain transaction...
-                                <div style="font-size: 9px; opacity: 0.5; margin-top: 5px;">10:32 AM</div>
-                            </div>
-                             <div class="msg msg-admin">
-                                Confirmed. Added to your balance.
-                                <div style="font-size: 9px; opacity: 0.5; margin-top: 5px;">10:33 AM</div>
-                            </div>
-                        </div>
-
+                        <div class="chat-box" id="admin-chat-display"></div>
                         <div class="chat-input-area">
-                            <button class="btn btn-sm btn-dark text-muted"><i class="fa-solid fa-paperclip"></i></button>
-                            <input type="text" class="cyber-text-field" placeholder="Type command message...">
-                            <button class="btn btn-sm" style="background: var(--neon-blue); color: #000; border-radius: 50%; width: 40px; height: 40px;"><i class="fa-solid fa-paper-plane"></i></button>
+                            <input type="text" id="admin-reply-input" class="cyber-text-field" placeholder="Type message..." onkeypress="handleEnter(event)">
+                            <button class="btn" onclick="sendAdminReply()" style="background: #00e676; border-radius: 50%; width: 40px; height: 40px;"><i class="fa-solid fa-paper-plane"></i></button>
                         </div>
                     </div>
                 </div>
@@ -172,16 +100,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        function toggleMode(btn) {
-            // Find parent group
-            let parent = btn.parentElement;
-            let btns = parent.getElementsByClassName('btn-toggle');
-            // Reset all
-            for(let b of btns) b.classList.remove('active');
-            // Activate clicked
-            btn.classList.add('active');
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/admin.js"></script>
 </body>
 </html>
