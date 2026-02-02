@@ -4227,7 +4227,7 @@ footer .newsletter-container form button {
 
 /* BINANCE STYLE VARIABLES */
 :root {
-    --binance-bg: #1e1e1e;
+    --binance-bg: rgb(25,26,31);
     --binance-yellow: #FCD535; /* Binance Official Yellow */
     --binance-gray: #EAECEF;
     --text-muted: #848E9C;
@@ -4262,27 +4262,45 @@ footer .newsletter-container form button {
 /* BUTTONS */
 .btn-login-gold {
     background-color: var(--binance-yellow);
-    color: #000;
+    color: rgb(229,200,85);
     font-weight: 700;
-    width: 100%;
+    width: 250px;
     padding: 14px;
     border-radius: 8px;
     border: none;
-    margin-bottom: 15px; /* Login နဲ့ Sign Up ကြား ဟမယ် */
+   margin: 0 auto 15px auto; /* Login နဲ့ Sign Up ကြား ဟမယ် */
     font-size: 16px;
     display: block;
     text-decoration: none;
 }
 
 .btn-signup-dark {
-    background-color: #2B3139;
+    background-color: rgb(229,200,85);
     color: var(--binance-gray);
     font-weight: 700;
-    width: 100%;
+    width: 250px;
     padding: 14px;
     border-radius: 8px;
     border: none;
+    margin: 0 auto;
     font-size: 16px;
     display: block;
     text-decoration: none;
+}
+
+/* BINANCE WIDGET CARD WRAPPER */
+.binance-card-wrapper {
+    background: #191a1f; /* နောက်ခံအနက် */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px; /* ထောင့်ကွေး */
+    padding: 10px;
+    margin-bottom: 15px; /* တစ်ကတ်နဲ့ တစ်ကတ် ခွာမယ် */
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+.binance-card-wrapper:hover {
+    transform: translateY(-2px);
+    border-color: #FCD535; /* Mouse တင်ရင် ရွှေရောင်သန်းမယ် */
 }
