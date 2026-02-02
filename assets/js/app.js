@@ -517,3 +517,39 @@ var MyScroll = "";
   };
   Init.i();
 })(window, document, jQuery);
+
+document.addEventListener("DOMContentLoaded", function() {
+    // ၁။ လက်ရှိရောက်နေတဲ့ Page နာမည်ကို ယူမယ်
+    const path = window.location.pathname;
+    const page = path.split("/").pop(); // ဥပမာ - index.html
+
+    // ၂။ Page နဲ့ Icon နာမည် တွဲမယ်
+    let currentIcon = "";
+
+    if (page === "" || page === "index.html") {
+        currentIcon = "home";
+    } else if (page === "about.html") {
+        currentIcon = "assets";
+    } else if (page === "market.html") {
+        currentIcon = "trade";
+    } else if (page === "contact.html") {
+        currentIcon = "service";
+    } else if (page === "profile.html") {
+        currentIcon = "profile";
+    }
+
+    // ၃။ Active ဖြစ်တဲ့ကောင်ကို Icon လဲမယ်
+    if (currentIcon) {
+        // Text အရောင်ပြောင်းဖို့ Class ထည့်မယ်
+        const linkElement = document.getElementById('link-' + currentIcon);
+        if (linkElement) {
+            linkElement.classList.add('active');
+        }
+        
+        // Image ကို -active.svg နဲ့ လဲလိုက်မယ်
+        const imgElement = document.getElementById('icon-' + currentIcon);
+        if (imgElement) {
+            imgElement.src = `assets/media/nav-icons/${currentIcon}-active.svg`;
+        }
+    }
+});
