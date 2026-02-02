@@ -534,7 +534,7 @@ document.addEventListener("DOMContentLoaded", function() {
         currentIcon = "trade";
     } else if (page === "contact.html") {
         currentIcon = "service";
-    } else if (page === "profile.html") {
+    } else if (path.includes("profile.html")) {
         currentIcon = "profile";
     }
 

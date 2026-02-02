@@ -513,14 +513,14 @@
  <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
     <script src="assets/js/vendor/slick.min.js"></script>
-
-    <script src="assets/js/app.js"></script>
+    
+  <script src="assets/js/app.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/core.js"></script>
     <script src="assets/js/assets.js"></script> 
 
-    <script>
+  <script>
         window.addEventListener('load', async function() {
             // (က) Login မဝင်ရသေးရင် ကန်ထုတ်မယ်
             if (typeof checkAccess === 'function') {
@@ -532,24 +532,7 @@
                 await updateUI();
             }
 
-            // 🔥 (ဂ) PROFILE SPECIFIC DATA (Profile စာမျက်နှာအတွက် သီးသန့်)
-            // User Email နဲ့ UID ကို ဆွဲထည့်ပေးမယ့်အပိုင်း
-            try {
-                const { data: { user } } = await db.auth.getUser();
-                if (user) {
-                    // Profile Email ပြမယ်
-                    const emailEl = document.getElementById('profile-email');
-                    if (emailEl) emailEl.innerText = user.email;
-
-                    // Profile UID (ID အရှေ့ ၈ လုံး) ပြမယ်
-                    const uidEl = document.getElementById('profile-uid');
-                    if (uidEl) uidEl.innerText = user.id.slice(0, 8);
-                }
-            } catch (error) {
-                console.error("Error loading profile data:", error);
-            }
-
-            // (ဃ) အားလုံးပြီးမှ Loading ဖျောက်မယ်
+            // (ဂ) အားလုံးပြီးမှ Loading ဖျောက်မယ်
             if (typeof hideLoader === 'function') {
                 hideLoader();
             }
