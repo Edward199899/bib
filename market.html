@@ -449,13 +449,14 @@
 </header>
 
 
-<div class="market-wrapper" style="padding-top: 70px; padding-bottom: 20px; height: 100vh; display: flex; flex-direction: column;">
+ <div class="market-wrapper">
+    <div class="chart-section">
+      <!-- container id ကို TradingView.widget က အသုံးပြုမယ် -->
+      <div id="tv-widget"></div>
+    </div>
+  </div>
 
-        <div class="chart-section" style="flex: 1; width: 100%; position: relative; background: #050b1a; border-bottom: 1px solid rgba(255,255,255,0.1); overflow: hidden;">
-            
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
-              <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
-               <script>
+  <script>
   (function(){
     // dynamic script loader — သင့် network / CSP / timing ပြဿနာတွေ detect လွယ်ဖို့
     var script = document.createElement('script');
@@ -506,9 +507,6 @@
     document.body.appendChild(script);
   })();
   </script>
-            </div>
-        </div>
-
       
 <div class="control-panel" style="padding: 10px 15px 1px 15px; background: #0b0e11; border-top: 1px solid rgba(255,255,255,0.1); flex-shrink: 0;">
     <div class="container">
