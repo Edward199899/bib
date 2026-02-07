@@ -1242,23 +1242,6 @@
 
     <script src="assets/js/app.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="assets/js/core.js"></script>
-
-    <script>
-        // core.js ထဲမှာ DOMContentLoaded နဲ့ checkAccess/hideLoader တွေ ပါပြီးသားမို့ 
-        // ဒီမှာ အထူးသဖြင့် updateUI တစ်ခုအတွက်ပဲ ရေးဖို့ လိုပါတော့တယ်။
-        window.addEventListener('load', async function() {
-            try {
-                // (က) Page အလိုက် UI ပြောင်းလဲမှုရှိရင် ဒီမှာ ခေါ်သုံးနိုင်သည်
-                if (typeof updateUI === 'function') {
-                    await updateUI();
-                }
-                
-                console.log("✅ About Page UI Updated.");
-            } catch (error) {
-                console.error("❌ Page Load Error:", error);
-            }
-        });
-    </script>
+    
 </body>
+</html>

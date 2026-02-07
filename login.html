@@ -235,15 +235,16 @@
         
         <h2 class="title">Welcome Back</h2>
 
-        <form onsubmit="event.preventDefault(); handleLogin();">
+        <form onsubmit="event.preventDefault(); handleLogin()">
+            
             <div class="input-group-custom">
-                <label class="form-label">USERNAME OR PHONE</label>
-                <input type="text" id="login-phone" class="form-control-custom" placeholder="Username or Phone" required>
+                <label class="form-label">PHONE NUMBER</label>
+                <input type="text" id="login-phone" class="form-control-custom" placeholder="09xxxxxxxxx" required>
             </div>
 
             <div class="input-group-custom">
                 <label class="form-label">PASSWORD</label>
-                <input type="password" id="login-password" class="form-control-custom" placeholder="••••" required>
+                <input type="password" id="login-password" class="form-control-custom" placeholder="••••••••" required>
             </div>
 
             <div class="d-flex justify-content-between mb-4">
@@ -262,10 +263,8 @@
         </a>
     </div>
 
- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/core.js"></script>
-    
     <script src="assets/js/auth.js"></script>
 
 </body>

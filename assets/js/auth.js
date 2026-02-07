@@ -1,123 +1,109 @@
-/* --- SGX INTEGRATED AUTHENTICATION SYSTEM --- */
+// assets/js/auth.js
 
-// ၁။ စနစ်ချိတ်ဆက်မှု စစ်ဆေးခြင်း
-if (typeof db === 'undefined') {
-    console.error("CRITICAL ERROR: Core System (db) not loaded!");
-}
-
-// ၂။ REGISTER FUNCTION (အဟောင်းမှ Validation + အသစ်မှ Auth Logic)
 async function handleRegister() {
-    const username = document.getElementById('reg-username').value.trim();
-    const phone = document.getElementById('reg-phone').value.trim();
-    const pass = document.getElementById('reg-pass').value.trim();
-    const confirmPass = document.getElementById('reg-confirm-pass').value.trim();
-    const isAgree = document.getElementById('reg-rule').checked;
-    const btn = document.querySelector('.btn-neon');
+    // ၁။ HTML ထဲက တန်ဖိုးတွေ ယူမယ်
+    const username = document.getElementById('reg-username').value;
+    const phone = document.getElementById('reg-phone').value;
+    const password = document.getElementById('reg-pass').value;
+    const confirmPass = document.getElementById('reg-confirm-pass').value;
 
-    // Validation စစ်ဆေးခြင်း
-    if (!username || !phone || !pass) return showToast("Fill all fields!", "error");
-    if (pass !== confirmPass) return showToast("Passwords do not match!", "error");
-    if (!isAgree) return showToast("Agree to Team Rules first!", "error");
-
-    // Loading State ပြောင်းမယ်
-    const originalText = btn.innerText;
-    btn.innerText = "Creating Account...";
-    btn.disabled = true;
-
-    // Supabase Auth အတွက် Fake Email ပြောင်းလဲခြင်း
-    const emailFake = phone + "@bibcoin.com";
-    
-    // (A) Supabase Auth မှာ User အသစ်ဆောက်ခြင်း
-    const { data, error: authError } = await db.auth.signUp({
-        email: emailFake,
-        password: pass
-    });
-
-    if (authError) {
-        showToast("Error: " + authError.message, "error");
-        btn.innerText = originalText;
-        btn.disabled = false;
+    // ၂။ စစ်ဆေးမှုများ (Validation)
+    if (!username || !phone || !password) {
+        alert("Please fill all fields!");
+        return;
+    }
+    if (password !== confirmPass) {
+        alert("Passwords do not match!");
         return;
     }
 
-    // (B) UID (ဂဏန်း ၆ လုံး) ထုတ်ခြင်း
-    const randomUID = Math.floor(100000 + Math.random() * 900000);
+    // Loading ပြမယ် (Button စာသားပြောင်းမယ်)
+    const btn = document.querySelector('button'); // သတိပြုရန်: Button tag ကို ဖမ်းထားသည်
+    const oldText = btn.innerText;
+    btn.innerText = "Processing...";
+    btn.disabled = true;
 
-    // (C) Profiles Table ထဲသို့ အချက်အလက်များ သိမ်းဆည်းခြင်း
-    const { error: profileError } = await db
-        .from('profiles') // Table name ကို သတိပြုပါ (profiles သို့မဟုတ် users)
-        .insert([
-            { 
-                id: data.user.id, 
-                username: username,
-                phone: phone,
-                balance: 0.00,
-                uid: randomUID,
-                joinDate: new Date().toISOString()
-            }
-        ]);
+    try {
+        // ၃။ Supabase Auth ဖြင့် အကောင့်ဖွင့်မယ် (Fake Email သုံးမယ်)
+        const emailFake = phone + "@bibcoin.com";
+        
+        const { data, error } = await db.auth.signUp({
+            email: emailFake,
+            password: password
+        });
 
-    if (profileError) {
-        showToast("Profile Error: " + profileError.message, "error");
-        btn.innerText = originalText;
+        if (error) throw error; // Error တက်ရင် Catch ကို ပို့မယ်
+
+        const userId = data.user.id;
+        // ၄။ ID (ဂဏန်း ၆ လုံး) ထုတ်မယ်
+        const randomUID = Math.floor(100000 + Math.random() * 900000).toString();
+
+        // ၅။ Profiles Table ထဲ Data ထည့်မယ်
+        const { error: profileError } = await db.from('profiles').insert([{
+            id: userId,
+            username: username,
+            phone: phone,
+            password: password, // လိုအပ်လို့ ထည့်ထားသည်
+            uid: randomUID
+        }]);
+
+        if (profileError) throw profileError;
+
+        // ၆။ Assets Table (ပိုက်ဆံအိတ်) ထဲ Data ထည့်မယ်
+        const { error: assetError } = await db.from('assets').insert([{
+            user_id: userId, // Profile နဲ့ ချိတ်ဖို့
+            uid: randomUID,
+            amount: 0,       // စဖွင့်ချင်း ၀ ကျပ်
+            currency: 'USDT'
+        }]);
+
+        if (assetError) throw assetError;
+
+        // ၇။ အားလုံးအောင်မြင်ရင်
+        alert("Account Created Successfully! ID: " + randomUID);
+        window.location.href = 'login.html';
+
+    } catch (err) {
+        alert("Error: " + err.message);
+        btn.innerText = oldText;
         btn.disabled = false;
-    } else {
-        localStorage.setItem('sgx_user_id', data.user.id); // Compatibility အတွက် သိမ်းထားခြင်း
-        showToast("Account Created Successfully!", "success");
-        setTimeout(() => window.location.href = 'index.html', 1500);
     }
 }
 
-// ၃။ LOGIN FUNCTION (အဟောင်းမှ Chat Trigger + အသစ်မှ Auth Logic)
+// 2. LOGIN FUNCTION
+// -----------------------------------
 async function handleLogin() {
-    const phone = document.getElementById('login-phone').value.trim();
-    const pass = document.getElementById('login-password').value.trim();
-    const btn = document.querySelector('.btn-login') || document.querySelector('.btn-neon');
+    const phone = document.getElementById('login-phone').value;
+    const password = document.getElementById('login-password').value;
+    const btn = document.querySelector('button'); // Login ခလုတ်ကို ဖမ်းမယ်
 
-    if (!phone || !pass) return showToast("Please fill all info", "error");
-
-    if(btn) btn.innerText = "Checking...";
-    
-    const emailFake = phone + "@bibcoin.com";
-
-    // (A) Supabase Auth ဖြင့် Login ဝင်ခြင်း
-    const { data, error: loginError } = await db.auth.signInWithPassword({
-        email: emailFake,
-        password: pass
-    });
-
-    if (loginError) {
-        showToast("Login Failed: ဖုန်းနံပါတ် သို့မဟုတ် Password မှားနေပါသည်", "error");
-        if(btn) btn.innerText = "ENTER UNIVERSE";
-    } else {
-        // (B) Login အောင်မြင်လျှင် Session သိမ်းပြီး Profile Data ယူမယ်
-        localStorage.setItem('sgx_user_id', data.user.id);
-        
-        // Profile data ကို ဆွဲယူခြင်း (Balance ရော UID ရော ပါအောင်လို့ပါ)
-        const { data: profile } = await db.from('profiles').select('*').eq('id', data.user.id).single();
-        
-        if (profile) {
-            // UI Transition & Chat Trigger
-            if (typeof enterUniverse === 'function') enterUniverse(profile);
-            if (typeof initMasterSystem === 'function') initMasterSystem(data.user.id);
-        }
-
-        showToast("Welcome back!", "success");
-        setTimeout(() => window.location.href = 'index.html', 1000);
+    if (!phone || !password) {
+        alert("Please fill all fields!");
+        return;
     }
-}
 
-// ၄။ UI HELPERS
-function showRegister() {
-    const loginBox = document.getElementById('login-box');
-    const registerBox = document.getElementById('register-box');
-    if(loginBox) loginBox.style.display = 'none';
-    if(registerBox) registerBox.style.display = 'block';
-}
+    // Loading ပြမယ်
+    const oldText = btn.innerText;
+    btn.innerText = "Checking...";
+    btn.disabled = true;
 
-function showLogin() {
-    const loginBox = document.getElementById('login-box');
-    const registerBox = document.getElementById('register-box');
-    if(registerBox) registerBox.style.display = 'none';
-    if(loginBox) loginBox.style.display = 'block';
+    try {
+        // Register တုန်းကလိုပဲ ဖုန်းနံပါတ်ကို Email ပြောင်းပြီး စစ်မယ်
+        const emailFake = phone + "@bibcoin.com";
+
+        const { data, error } = await db.auth.signInWithPassword({
+            email: emailFake,
+            password: password
+        });
+
+        if (error) throw error;
+
+        // Login အောင်မြင်ရင် Dashboard (index.html) ကို ပို့မယ်
+        window.location.href = 'index.html';
+
+    } catch (err) {
+        alert("Login Failed: " + err.message);
+        btn.innerText = oldText;
+        btn.disabled = false;
+    }
 }

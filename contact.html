@@ -1010,18 +1010,5 @@
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="assets/js/core.js"></script>
-    <script src="assets/js/chat.js"></script>
-
-    <script>
-        // core.js က checkAccess() ကို လုပ်ဆောင်ပြီးသား ဖြစ်၍ 
-        // ဒီမှာ UI update တစ်ခုပဲ လိုအပ်ပါသည်
-        window.addEventListener('load', async function() {
-            if (typeof updateUI === 'function') {
-                await updateUI();
-            }
-        });
-    </script>
 </body>
 </html>

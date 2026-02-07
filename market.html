@@ -917,24 +917,5 @@
     <script src="assets/js/vendor/slick.min.js"></script>
     <script src="assets/js/app.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="assets/js/core.js"></script>
-
-    <script src="assets/js/chat.js"></script>
-
-    <script>
-        // core.js က checkAccess() နဲ့ hideLoader() ကို လုပ်ပေးမှာဖြစ်လို့ 
-        // ဒီမှာ UI update (Profile data) အတွက်ပဲ သီးသန့် ရေးပေးရန်
-        window.addEventListener('load', async function() {
-            if (typeof updateUI === 'function') {
-                await updateUI();
-            }
-            
-            // Trading Graph သို့မဟုတ် Markets နှင့်ဆိုင်သော Startup Logic ရှိလျှင် ဒီမှာထည့်ပါ
-            if (typeof initMarketSystem === 'function') {
-                initMarketSystem();
-            }
-        });
-    </script>
 </body>
 </html>
