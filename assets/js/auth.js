@@ -107,3 +107,15 @@ async function handleLogin() {
         btn.disabled = false;
     }
 }
+
+// 3. LOGOUT FUNCTION
+// -----------------------------------
+async function handleLogout() {
+    const { error } = await db.auth.signOut();
+    if (error) {
+        alert("Logout Error: " + error.message);
+    } else {
+        // Logout ထွက်ပြီးရင် Login စာမျက်နှာကို ပြန်ပို့မယ်
+        window.location.href = 'blog-grid.html';
+    }
+}

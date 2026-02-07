@@ -2333,5 +2333,38 @@
     <script src="assets/js/vendor/slick.min.js"></script>
     <script src="assets/js/app.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/core.js"></script>
+
+<script>
+    // ၁။ Login ဝင်မထားရင် ကန်ထုတ်မယ်
+    checkAccess(); 
+
+    // ၂။ Data တွေကို Database ကနေ ဆွဲထုတ်မယ်
+    async function loadDashboard() {
+        const { data: { user } } = await db.auth.getUser();
+
+        if (user) {
+            // (က) Profiles Table မှ UID ယူမယ်
+            const { data: profile } = await db.from('profiles').select('*').eq('id', user.id).single();
+            if (profile) {
+                // Header မှာ UID ပြမယ့်နေရာ (ID ရှိရင် ထည့်ပါ)
+                const uidEl = document.getElementById('header-uid'); 
+                if (uidEl) uidEl.innerText = "UID: " + profile.uid;
+            }
+
+            // (ခ) Assets Table မှ ပိုက်ဆံ (Balance) ယူမယ်
+            const { data: asset } = await db.from('assets').select('*').eq('user_id', user.id).single();
+            if (asset) {
+                // Balance ပြမယ့်နေရာ (ID: user-balance သို့မဟုတ် total-balance)
+                const balanceEl = document.getElementById('user-balance'); 
+                if (balanceEl) balanceEl.innerText = asset.amount; // .toFixed(2) ထည့်လိုက ထည့်နိုင်သည်
+            }
+        }
+    }
+
+    loadDashboard();
+</script>
+
     </body>
 </html>

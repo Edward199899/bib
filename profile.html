@@ -445,47 +445,48 @@
 </header>
 
 
-    <div class="container mt-4">
+    <div class="container" style="padding-top: 75px; padding-bottom: 80px;">
         
-        <div class="glass-fit-card mb-4" style="width: 100%; max-width: 100%; padding: 20px;">
-            <div class="d-flex align-items-center gap-3">
-                <div style="width: 60px; height: 60px; background: #FCD535; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 24px;">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div>
-                    <h5 class="text-white mb-1" id="user-email">User Email</h5> <div class="badge bg-secondary">UID: 8842019</div>
-                    <div class="text-success small mt-1"><i class="fa-solid fa-circle-check"></i> Verified</div>
-                </div>
+    <div class="glass-fit-card mb-4" style="width: 100%; max-width: 100%; padding: 20px;">
+        <div class="d-flex align-items-center gap-3">
+            <div style="width: 60px; height: 60px; background: #FCD535; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 24px;">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div>
+                <h5 class="text-white mb-1" id="profile-name">Loading...</h5> 
+                <div class="badge bg-secondary" id="profile-uid">UID: ...</div>
+                <div class="text-success small mt-1"><i class="fa-solid fa-circle-check"></i> Verified</div>
             </div>
         </div>
+    </div>
 
-        <div class="list-group mb-4" style="border-radius: 12px; overflow: hidden; border: 1px solid #2b3139;">
-            
-            <a href="service.html" class="list-group-item list-group-item-action py-3 d-flex justify-content-between align-items-center" style="background: #23262d; color: #fff; border-color: #2b3139;">
-                <span><i class="fa-solid fa-headset me-3 text-warning"></i> Help & Support</span>
-                <i class="fa-solid fa-chevron-right text-muted" style="font-size: 12px;"></i>
-            </a>
+    <div class="list-group mb-4" style="border-radius: 12px; overflow: hidden; border: 1px solid #2b3139;">
+        
+        <a href="contact.html" class="list-group-item list-group-item-action py-3 d-flex justify-content-between align-items-center" style="background: #23262d; color: #fff; border-color: #2b3139;">
+            <span><i class="fa-solid fa-headset me-3 text-warning"></i> Help & Support</span>
+            <i class="fa-solid fa-chevron-right text-muted" style="font-size: 12px;"></i>
+        </a>
+
+        <a href="#" class="list-group-item list-group-item-action py-3 d-flex justify-content-between align-items-center" style="background: #23262d; color: #fff; border-color: #2b3139;">
+            <span><i class="fa-solid fa-shield-halved me-3 text-warning"></i> Security</span>
+            <i class="fa-solid fa-chevron-right text-muted" style="font-size: 12px;"></i>
+        </a>
 
             <a href="#" class="list-group-item list-group-item-action py-3 d-flex justify-content-between align-items-center" style="background: #23262d; color: #fff; border-color: #2b3139;">
-                <span><i class="fa-solid fa-shield-halved me-3 text-warning"></i> Security</span>
-                <i class="fa-solid fa-chevron-right text-muted" style="font-size: 12px;"></i>
-            </a>
-
-             <a href="#" class="list-group-item list-group-item-action py-3 d-flex justify-content-between align-items-center" style="background: #23262d; color: #fff; border-color: #2b3139;">
-                <span><i class="fa-solid fa-gear me-3 text-warning"></i> Settings</span>
-                <i class="fa-solid fa-chevron-right text-muted" style="font-size: 12px;"></i>
-            </a>
-
-        </div>
-
-        <button onclick="logout()" class="btn w-100 py-3 fw-bold" style="background: #2b3139; color: #f6465d; border: 1px solid #f6465d;">
-            <i class="fa-solid fa-right-from-bracket me-2"></i> Log Out
-        </button>
+            <span><i class="fa-solid fa-gear me-3 text-warning"></i> Settings</span>
+            <i class="fa-solid fa-chevron-right text-muted" style="font-size: 12px;"></i>
+        </a>
 
     </div>
 
-     <div class="bottom-nav">
-    
+    <button onclick="handleLogout()" class="btn w-100 py-3 fw-bold" style="background: #2b3139; color: #f6465d; border: 1px solid #f6465d;">
+        <i class="fa-solid fa-right-from-bracket me-2"></i> Log Out
+    </button>
+
+</div>
+
+<div class="bottom-nav">
+
     <a href="index.html" class="nav-item" id="link-home">
         <img src="assets/media/nav-icons/home.svg" alt="Home" class="nav-icon" id="icon-home">
         <span style="font-size: 10px; font-weight: 600;">Home</span>
@@ -506,7 +507,7 @@
         <span style="font-size: 10px; font-weight: 600;">Service</span>
     </a>
 
-    <a href="profile.html" class="nav-item" id="link-profile">
+    <a href="profile.html" class="nav-item active" id="link-profile">
         <img src="assets/media/nav-icons/profile.svg" alt="Profile" class="nav-icon" id="icon-profile">
         <span style="font-size: 10px; font-weight: 600;">Profile</span>
     </a>
@@ -517,6 +518,45 @@
     <script src="assets/js/vendor/bootstrap.min.js"></script>
     <script src="assets/js/vendor/slick.min.js"></script>
     <script src="assets/js/app.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/auth.js"></script> <script>
+    async function loadProfile() {
+        // (က) Login ဝင်ထားသူ ရှိမရှိ စစ်မယ်
+        const { data: { user } } = await db.auth.getUser();
+
+        if (user) {
+            // (ခ) profiles table ထဲက Data ယူမယ်
+            const { data: profile, error } = await db
+                .from('profiles')
+                .select('*')
+                .eq('id', user.id)
+                .single();
+
+            if (profile) {
+                // (ဂ) HTML ထဲက ID တွေမှာ စာလိုက်ဖြည့်မယ်
+                // Username
+                const nameEl = document.getElementById('profile-name');
+                if(nameEl) nameEl.innerText = profile.username || "No Name";
+
+                // Phone
+                const phoneEl = document.getElementById('profile-phone');
+                if(phoneEl) phoneEl.innerText = profile.phone;
+
+                // Game ID (UID)
+                const uidEl = document.getElementById('profile-uid'); // သို့မဟုတ် profile-id
+                if(uidEl) uidEl.innerText = "ID: " + profile.uid;
+            }
+        } else {
+            // Login မဝင်ထားရင် ပြန်ကန်ထုတ်မယ်
+            window.location.href = 'login.html';
+        }
+    }
+
+    // Page ပွင့်တာနဲ့ Function ကို ခေါ်မယ်
+    loadProfile();
+</script>
 
 </body>
 </html>

@@ -852,6 +852,23 @@
     <script src="assets/js/vendor/bootstrap.min.js"></script>
     <script src="assets/js/app.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/core.js"></script>
+
+<script>
+    async function checkSkip() {
+        // Login ဝင်ထားလား စစ်မယ်
+        const { data: { session } } = await db.auth.getSession();
+
+        if (session) {
+            // Login ဝင်ထားပြီးသားဆိုရင် ဒီစာမျက်နှာကို မပြဘဲ Dashboard ကို ကျော်ခိုင်းမယ်
+            window.location.href = 'index.html';
+        }
+        // Login မဝင်ရသေးရင်တော့ ဘာမှမလုပ်ဘူး (ဒီစာမျက်နှာကိုပဲ ဆက်ပြမယ်)
+    }
+
+    checkSkip();
+</script>
 
     </body>
 </html>
