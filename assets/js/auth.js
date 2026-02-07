@@ -61,7 +61,7 @@ async function handleRegister() {
 
         // ၇။ အားလုံးအောင်မြင်ရင်
         alert("Account Created Successfully! ID: " + randomUID);
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
 
     } catch (err) {
         alert("Error: " + err.message);
