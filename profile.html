@@ -517,36 +517,45 @@
 <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
     <script src="assets/js/vendor/slick.min.js"></script>
-    <script src="assets/js/app.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/core.js"></script>
-<script src="assets/js/auth.js"></script> <script>
+<script src="assets/js/auth.js"></script> 
+<script>
     async function loadProfile() {
-        // (က) Login ဝင်ထားသူ ရှိမရှိ စစ်မယ်
+        console.log("Loading Profile...");
+        
+        // ၁။ Login ဝင်ထားသူ ရှိမရှိ စစ်မယ်
         const { data: { user } } = await db.auth.getUser();
 
         if (user) {
-            // (ခ) profiles table ထဲက Data ယူမယ်
+            console.log("User Found:", user.id);
+            
+            // ၂။ profiles table ထဲက Data ယူမယ်
             const { data: profile, error } = await db
                 .from('profiles')
                 .select('*')
                 .eq('id', user.id)
                 .single();
 
+            if (error) {
+                console.error("Supabase Error:", error.message);
+                alert("Error fetching profile: " + error.message);
+                return;
+            }
+
             if (profile) {
-                // (ဂ) HTML ထဲက ID တွေမှာ စာလိုက်ဖြည့်မယ်
-                // Username
-                const nameEl = document.getElementById('profile-name');
-                if(nameEl) nameEl.innerText = profile.username || "No Name";
-
-                // Phone
-                const phoneEl = document.getElementById('profile-phone');
-                if(phoneEl) phoneEl.innerText = profile.phone;
-
-                // Game ID (UID)
-                const uidEl = document.getElementById('profile-uid'); // သို့မဟုတ် profile-id
-                if(uidEl) uidEl.innerText = "ID: " + profile.uid;
+                console.log("Profile Data:", profile);
+                // ၃။ HTML ထဲက ID တွေမှာ စာလိုက်ဖြည့်မယ်
+                document.getElementById('profile-name').innerText = profile.username || "No Name";
+                document.getElementById('profile-uid').innerText = "ID: " + profile.uid;
+            } else {
+                // Profile မရှိရင် (Register တုန်းက Error တက်ခဲ့ရင် ဒီလိုဖြစ်တတ်တယ်)
+                alert("Profile Not Found! Please Register Again.");
+                
+                // User အပျက်ကြီး ဖြစ်နေလို့ Logout လုပ်ပြီး Register ပြန်လုပ်ခိုင်းမယ်
+                await db.auth.signOut();
+                window.location.href = 'register.html';
             }
         } else {
             // Login မဝင်ထားရင် ပြန်ကန်ထုတ်မယ်
@@ -554,7 +563,6 @@
         }
     }
 
-    // Page ပွင့်တာနဲ့ Function ကို ခေါ်မယ်
     loadProfile();
 </script>
 
