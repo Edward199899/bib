@@ -912,35 +912,29 @@
 
 </div>
 
-    <!-- Jquery Js -->
+  <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
     <script src="assets/js/vendor/slick.min.js"></script>
     <script src="assets/js/app.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/core.js"></script>
 
-    <script>
-        window.addEventListener('load', async function() {
-            
-            // (က) Login မဝင်ရသေးရင် ကန်ထုတ်မယ်
-            if (typeof checkAccess === 'function') {
-                await checkAccess();
-            }
+    <script src="assets/js/chat.js"></script>
 
-            // (ခ) Header မှာ နာမည်၊ ID၊ ပိုက်ဆံ ပေါ်အောင်လုပ်မယ်
+    <script>
+        // core.js က checkAccess() နဲ့ hideLoader() ကို လုပ်ပေးမှာဖြစ်လို့ 
+        // ဒီမှာ UI update (Profile data) အတွက်ပဲ သီးသန့် ရေးပေးရန်
+        window.addEventListener('load', async function() {
             if (typeof updateUI === 'function') {
                 await updateUI();
             }
-
-            // (ဂ) အားလုံးပြီးမှ Loading ဖျောက်မယ် (Smooth ဖြစ်သွားအောင်)
-            if (typeof hideLoader === 'function') {
-                hideLoader();
+            
+            // Trading Graph သို့မဟုတ် Markets နှင့်ဆိုင်သော Startup Logic ရှိလျှင် ဒီမှာထည့်ပါ
+            if (typeof initMarketSystem === 'function') {
+                initMarketSystem();
             }
         });
     </script>
-
 </body>
 </html>

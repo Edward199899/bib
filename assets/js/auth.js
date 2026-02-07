@@ -1,90 +1,123 @@
-/* --- AUTHENTICATION SYSTEM --- */
+/* --- SGX INTEGRATED AUTHENTICATION SYSTEM --- */
 
-// 1. REGISTER FUNCTION
+// ၁။ စနစ်ချိတ်ဆက်မှု စစ်ဆေးခြင်း
+if (typeof db === 'undefined') {
+    console.error("CRITICAL ERROR: Core System (db) not loaded!");
+}
+
+// ၂။ REGISTER FUNCTION (အဟောင်းမှ Validation + အသစ်မှ Auth Logic)
 async function handleRegister() {
     const username = document.getElementById('reg-username').value.trim();
     const phone = document.getElementById('reg-phone').value.trim();
-    const password = document.getElementById('reg-password').value.trim();
-    const btn = document.querySelector('.btn-neon'); // Loading ပြဖို့
+    const pass = document.getElementById('reg-pass').value.trim();
+    const confirmPass = document.getElementById('reg-confirm-pass').value.trim();
+    const isAgree = document.getElementById('reg-rule').checked;
+    const btn = document.querySelector('.btn-neon');
 
-    if (!username || !phone || !password) {
-        alert("Please fill all fields!");
-        return;
-    }
+    // Validation စစ်ဆေးခြင်း
+    if (!username || !phone || !pass) return showToast("Fill all fields!", "error");
+    if (pass !== confirmPass) return showToast("Passwords do not match!", "error");
+    if (!isAgree) return showToast("Agree to Team Rules first!", "error");
 
-    // Loading ပြမယ်
+    // Loading State ပြောင်းမယ်
     const originalText = btn.innerText;
     btn.innerText = "Creating Account...";
     btn.disabled = true;
 
-    // Supabase မှာ User အသစ်ဆောက်မယ်
-    const emailFake = phone + "@bibcoin.com"; // Phone ကို Email အတုပြောင်း
+    // Supabase Auth အတွက် Fake Email ပြောင်းလဲခြင်း
+    const emailFake = phone + "@bibcoin.com";
     
-    const { data, error } = await db.auth.signUp({
+    // (A) Supabase Auth မှာ User အသစ်ဆောက်ခြင်း
+    const { data, error: authError } = await db.auth.signUp({
         email: emailFake,
-        password: password
+        password: pass
     });
 
-    if (error) {
-        alert("Error: " + error.message);
+    if (authError) {
+        showToast("Error: " + authError.message, "error");
         btn.innerText = originalText;
         btn.disabled = false;
-    } else {
-        // 🔥 UID (ဂဏန်း ၆ လုံး) ကျပန်းထုတ်မယ် 🔥
-        const randomUID = Math.floor(100000 + Math.random() * 900000);
-
-        // Profiles Table ထဲ Data ထည့်မယ်
-        const { error: profileError } = await db
-            .from('profiles')
-            .insert([
-                { 
-                    id: data.user.id, // Auth ID နဲ့ချိတ်မယ်
-                    username: username,
-                    phone: phone,
-                    balance: 0.00,
-                    uid: randomUID  // ✅ ဒီနေရာမှာ UID ပေါင်းထည့်လိုက်ပြီ
-                }
-            ]);
-
-        if (profileError) {
-            console.error(profileError); // Error စစ်ဖို့ console ထုတ်ထားမယ်
-            alert("Profile Save Error: " + profileError.message);
-            // Error တက်ရင် Button ပြန်ပြင်ပေးမယ်
-            btn.innerText = originalText;
-            btn.disabled = false;
-        } else {
-            alert("Account Created Successfully!");
-            window.location.href = 'index.html'; // Index ကိုပို့မယ်
-        }
-    }
-}
-
-// 2. LOGIN FUNCTION
-async function handleLogin() {
-    const phone = document.getElementById('login-phone').value.trim();
-    const password = document.getElementById('login-password').value.trim();
-    const btn = document.querySelector('.btn-login');
-
-    if (!phone || !password) {
-        alert("Please fill all fields!");
         return;
     }
 
-    // Loading...
-    btn.innerText = "Checking...";
+    // (B) UID (ဂဏန်း ၆ လုံး) ထုတ်ခြင်း
+    const randomUID = Math.floor(100000 + Math.random() * 900000);
+
+    // (C) Profiles Table ထဲသို့ အချက်အလက်များ သိမ်းဆည်းခြင်း
+    const { error: profileError } = await db
+        .from('profiles') // Table name ကို သတိပြုပါ (profiles သို့မဟုတ် users)
+        .insert([
+            { 
+                id: data.user.id, 
+                username: username,
+                phone: phone,
+                balance: 0.00,
+                uid: randomUID,
+                joinDate: new Date().toISOString()
+            }
+        ]);
+
+    if (profileError) {
+        showToast("Profile Error: " + profileError.message, "error");
+        btn.innerText = originalText;
+        btn.disabled = false;
+    } else {
+        localStorage.setItem('sgx_user_id', data.user.id); // Compatibility အတွက် သိမ်းထားခြင်း
+        showToast("Account Created Successfully!", "success");
+        setTimeout(() => window.location.href = 'index.html', 1500);
+    }
+}
+
+// ၃။ LOGIN FUNCTION (အဟောင်းမှ Chat Trigger + အသစ်မှ Auth Logic)
+async function handleLogin() {
+    const phone = document.getElementById('login-phone').value.trim();
+    const pass = document.getElementById('login-password').value.trim();
+    const btn = document.querySelector('.btn-login') || document.querySelector('.btn-neon');
+
+    if (!phone || !pass) return showToast("Please fill all info", "error");
+
+    if(btn) btn.innerText = "Checking...";
     
     const emailFake = phone + "@bibcoin.com";
 
-    const { data, error } = await db.auth.signInWithPassword({
+    // (A) Supabase Auth ဖြင့် Login ဝင်ခြင်း
+    const { data, error: loginError } = await db.auth.signInWithPassword({
         email: emailFake,
-        password: password
+        password: pass
     });
 
-    if (error) {
-        alert("Login Failed: ဖုန်းနံပါတ် သို့မဟုတ် Password မှားနေပါသည်");
-        btn.innerText = "LOGIN";
+    if (loginError) {
+        showToast("Login Failed: ဖုန်းနံပါတ် သို့မဟုတ် Password မှားနေပါသည်", "error");
+        if(btn) btn.innerText = "ENTER UNIVERSE";
     } else {
-        // Login မှန်ရင် Index ကိုတန်းပို့မယ်
-        window.location.href = 'index.html';
+        // (B) Login အောင်မြင်လျှင် Session သိမ်းပြီး Profile Data ယူမယ်
+        localStorage.setItem('sgx_user_id', data.user.id);
+        
+        // Profile data ကို ဆွဲယူခြင်း (Balance ရော UID ရော ပါအောင်လို့ပါ)
+        const { data: profile } = await db.from('profiles').select('*').eq('id', data.user.id).single();
+        
+        if (profile) {
+            // UI Transition & Chat Trigger
+            if (typeof enterUniverse === 'function') enterUniverse(profile);
+            if (typeof initMasterSystem === 'function') initMasterSystem(data.user.id);
+        }
+
+        showToast("Welcome back!", "success");
+        setTimeout(() => window.location.href = 'index.html', 1000);
     }
+}
+
+// ၄။ UI HELPERS
+function showRegister() {
+    const loginBox = document.getElementById('login-box');
+    const registerBox = document.getElementById('register-box');
+    if(loginBox) loginBox.style.display = 'none';
+    if(registerBox) registerBox.style.display = 'block';
+}
+
+function showLogin() {
+    const loginBox = document.getElementById('login-box');
+    const registerBox = document.getElementById('register-box');
+    if(registerBox) registerBox.style.display = 'none';
+    if(loginBox) loginBox.style.display = 'block';
 }

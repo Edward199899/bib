@@ -994,50 +994,34 @@
 </div>
 
     
-    <!-- Jquery Js -->
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
+ <script src="assets/js/vendor/jquery-3.6.3.min.js"></script> <script src="assets/js/vendor/bootstrap.min.js"></script>
     <script src="assets/js/vendor/jquery-validator.js"></script>
-
     <script src="assets/js/app.js"></script>
 
-<script>
+    <script>
         $(window).on('load', function() {
-            // Preloader ပျောက်သွားပြီး 0.5 စက္ကန့်နေမှ Input Bar ကို ဖြည်းဖြည်းချင်း ပေါ်လာစေမယ်
+            // Input Bar ကို ဖြည်းဖြည်းချင်း ပေါ်လာစေမည့် Animation
             setTimeout(function() {
                 $('.chat-input-area').fadeIn(1500); 
             }, 3800);
             
-            // Auto scroll to bottom
+            // စာမျက်နှာကို အောက်ဆုံးသို့ Scroll ဆွဲချခြင်း
             window.scrollTo(0, document.body.scrollHeight);
         });
     </script>
 
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/core.js"></script>
-     <script src="assets/js/chat.js"></script>
+    <script src="assets/js/chat.js"></script>
 
     <script>
+        // core.js က checkAccess() ကို လုပ်ဆောင်ပြီးသား ဖြစ်၍ 
+        // ဒီမှာ UI update တစ်ခုပဲ လိုအပ်ပါသည်
         window.addEventListener('load', async function() {
-            
-            // (က) Login မဝင်ရသေးရင် ကန်ထုတ်မယ်
-            if (typeof checkAccess === 'function') {
-                await checkAccess();
-            }
-
-            // (ခ) Header မှာ နာမည်၊ ID၊ ပိုက်ဆံ ပေါ်အောင်လုပ်မယ်
             if (typeof updateUI === 'function') {
                 await updateUI();
             }
-
-            // (ဂ) အားလုံးပြီးမှ Loading ဖျောက်မယ် (Smooth ဖြစ်သွားအောင်)
-            if (typeof hideLoader === 'function') {
-                hideLoader();
-            }
         });
     </script>
-
 </body>
 </html>

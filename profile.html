@@ -513,31 +513,22 @@
 
 </div>
 
- <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
+<script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
     <script src="assets/js/vendor/slick.min.js"></script>
-
-  <script src="assets/js/app.js"></script>
+    <script src="assets/js/app.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/core.js"></script>
-    <script src="assets/js/assets.js"></script> 
 
-  <script>
+    <script>
         window.addEventListener('load', async function() {
-            // (က) Login မဝင်ရသေးရင် ကန်ထုတ်မယ်
-            if (typeof checkAccess === 'function') {
-                await checkAccess();
-            }
+            // core.js ထဲက DOMContentLoaded logic က checkAccess() နဲ့ hideLoader() ကို 
+            // အလိုအလျောက် လုပ်ဆောင်ပေးမှာ ဖြစ်လို့ ဒီမှာ ထပ်ရေးစရာ မလိုတော့ပါဘူး။
 
-            // (ခ) Header နဲ့ တခြား UI တွေ Update လုပ်မယ်
+            // Profile Data များကို UI တွင် နေရာချခြင်း (ဥပမာ- နာမည်၊ ဖုန်းနံပါတ် ပြောင်းခြင်း)
             if (typeof updateUI === 'function') {
                 await updateUI();
-            }
-
-            // (ဂ) အားလုံးပြီးမှ Loading ဖျောက်မယ်
-            if (typeof hideLoader === 'function') {
-                hideLoader();
             }
         });
     </script>
